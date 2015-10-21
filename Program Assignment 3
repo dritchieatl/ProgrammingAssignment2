@@ -1,0 +1,44 @@
+Enter file contents heremakecacheMatrix <- function(x=matrix()) {   
+  
+  m <- NULL
+  
+  set = function(y) {
+    
+    x<<- y
+    m<<- NULL
+    
+    
+  }
+  
+  # Using the example given in the assignment, mean is
+  # a function, so I generally replaced it with the function
+  # inverse.
+
+  get <- function() x
+  setinverse <- function(inverse) m<<- inverse
+  getinverse <- function() m
+  list(set = set, get = get,
+     setinverse = setinverse, getinverse = getinverse)
+
+}
+
+makecacheSolve <- function(x, ...)  {
+  
+  m <- x$getinverse()
+  if(!is.null(m)) {
+    message("getting cached data")
+    return(m)
+    
+  }
+  
+  data <- x$get()
+  m <- solve(data, ...)
+  x$setdata(m)
+  m
+  
+}
+
+
+
+
+
